@@ -1,0 +1,87 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "version": "1.0.0",
+      "title": "RandoInfo",
+      "description": "Get random bits of information!"
+    },
+    "host": "rando-info.vercel.app",
+    "basePath": "/api/v1",
+    "schemes": [
+      "https"
+    ],
+    "paths": {
+      "/weather": {
+        "get": {
+          "summary": "Returns the forecast in a random city in the entire world.",
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "A successful invocation response",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "continent": {
+                    "type": "string",
+                    "example": "Africa/Asmara"
+                  },
+                  "local_time": {
+                    "type": "string",
+                    "example": "2025-01-20 11:39"
+                  },
+                  "description": {
+                    "type": "string",
+                    "example": "It is currently warm in Dubellu (Eritrea) with patchy rain nearby."
+                  },
+                  "icon": {
+                    "type": "string",
+                    "example": "☀️"
+                  },
+                  "temperature": {
+                    "type": "object",
+                    "example": {
+                      "fahrenheit": 79.4,
+                      "celcius": 26.3
+                    }
+                  },
+                  "coordinates": {
+                    "type": "object",
+                    "example": {
+                      "latitude": 15.78915,
+                      "longitude": 41.04769
+                    }
+                  },
+                  "google_maps": {
+                    "type": "string",
+                    "example": "https://www.google.com/maps?q=15.78915,41.04769"
+                  },
+                  "open_street_maps": {
+                    "type": "string",
+                    "example": "https://www.openstreetmap.org/?mlat=15.78915&mlon=41.04769"
+                  },
+                  "sucess": {
+                    "type": "boolean",
+                    "example": true
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "A unuccessful invocation response",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "sucess": {
+                    "type": "boolean",
+                    "example": false
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
