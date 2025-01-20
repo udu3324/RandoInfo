@@ -24,58 +24,69 @@
                 "type": "object",
                 "properties": {
                   "continent": {
-                    "type": "string",
-                    "example": "Africa/Asmara"
+                    "type": "string"
                   },
                   "local_time": {
-                    "type": "string",
-                    "example": "2025-01-20 11:39"
+                    "type": "string"
                   },
                   "description": {
-                    "type": "string",
-                    "example": "It is currently warm in Dubellu (Eritrea) with patchy rain nearby."
+                    "type": "string"
                   },
                   "icon": {
                     "type": "string",
-                    "example": "☀️"
+                    "example": "emoji"
                   },
                   "temperature": {
                     "type": "object",
                     "example": {
-                      "fahrenheit": 79.4,
-                      "celcius": 26.3
+                      "fahrenheit": "float",
+                      "celcius": "float"
                     }
                   },
                   "coordinates": {
                     "type": "object",
                     "example": {
-                      "latitude": 15.78915,
-                      "longitude": 41.04769
+                      "latitude": "float",
+                      "longitude": "float"
                     }
                   },
                   "google_maps": {
                     "type": "string",
-                    "example": "https://www.google.com/maps?q=15.78915,41.04769"
+                    "example": "url"
                   },
                   "open_street_maps": {
                     "type": "string",
-                    "example": "https://www.openstreetmap.org/?mlat=15.78915&mlon=41.04769"
+                    "example": "url"
                   },
                   "sucess": {
-                    "type": "boolean",
-                    "example": true
+                    "type": "boolean"
                   }
                 }
               }
             },
             "404": {
-              "description": "A unuccessful invocation response",
+              "description": "A unsuccessful invocation response",
               "schema": {
                 "type": "object",
                 "properties": {
                   "sucess": {
                     "type": "boolean",
                     "example": false
+                  }
+                }
+              }
+            },
+            "504": {
+              "description": "Gateway timeout/ratelimit",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "error": {
+                    "type": "object",
+                    "example": {
+                      "code": "504",
+                      "message": "An error occurred with your deployment"
+                    }
                   }
                 }
               }
