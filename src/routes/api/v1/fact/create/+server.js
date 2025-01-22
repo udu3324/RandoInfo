@@ -6,9 +6,9 @@ export async function POST({ request, getClientAddress }) {
     if (numOfFacts === -1) {
         return new Response("Failed to read facts database", { status: 500 })
     }
-    
-    if (numOfFacts > 10) {
-        return new Response("Already created too many facts", { status: 400 })
+
+    if (numOfFacts > 9) {
+        return new Response("Reached limit of 10 facts", { status: 400 })
     }
 
     let fact
