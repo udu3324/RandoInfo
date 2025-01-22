@@ -1,10 +1,18 @@
 import { supabase } from '$lib/supabase.js';
 
 export async function POST({ request, getClientAddress }) {
-    const fact = await request.json()
+    let fact
+    try {
+        fact = await request.json()
+    } catch (error) {
+        return new Response('Invalid json', { status: 401 })
+    }
+
     console.log(fact)
+    console.log(fact.fact)
+
     if (!fact.fact) {
-        return new Response('Did not provide fact', { status: 401 })
+        return new Response('Did not provide fact', { status: 402 })
     }
 
     if (fact.fact.length < 1) {
