@@ -2,9 +2,13 @@ import { supabase } from '$lib/supabase.js';
 
 export async function POST({ request, getClientAddress }) {
     //check if a fact is already stored from the same user/ip
-    const canContinue = await alreadyCreatedFact(getClientAddress())
-    if (canContinue) {
-        return new Response("Already created a fact!", { status: 400 })
+    const numOfFacts = await numOfFactsCreated(getClientAddress())
+    if (numOfFacts === -1) {
+        return new Response("Failed to read facts database", { status: 500 })
+    }
+    
+    if (numOfFacts > 10) {
+        return new Response("Already created too many facts", { status: 400 })
     }
 
     let fact
@@ -23,7 +27,7 @@ export async function POST({ request, getClientAddress }) {
     }
 
     if (fact.fact.trim().length < 1) {
-        return new Response('Did not provide fact', { status: 402 })
+        return new Response('Fact is empty', { status: 402 })
     }
 
     const { error } = await supabase.from('facts').insert([{
@@ -40,19 +44,15 @@ export async function POST({ request, getClientAddress }) {
     return new Response(`Fact saved sucessfully! "${fact.fact}"`, { status: 200 })
 }
 
-async function alreadyCreatedFact(ip) {
-    const { data, error } = await supabase
+async function numOfFactsCreated(ip) {
+    const { count, error } = await supabase
     .from('facts')
-    .select('*')
+    .select('*', { count: 'exact', head: true})
     .eq('ip', ip)
-    .single()
 
-    //the only error should be the one where a row is not found
     if (error) {
-        if (error.code === "PGRST116") {
-            return false
-        }
+        return -1
     }
 
-    return true
+    return count
 }
