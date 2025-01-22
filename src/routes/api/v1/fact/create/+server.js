@@ -30,6 +30,7 @@ export async function POST({ request, getClientAddress }) {
     }])
 
     if (error) {
+        console.log("error", error)
         return new Response("Failed to write to database!", { status: 500 })
     }
 
