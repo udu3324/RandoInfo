@@ -2,7 +2,8 @@ import { supabase } from '$lib/supabase.js';
 
 export async function POST({ request, getClientAddress }) {
     //check if a fact is already stored from the same user/ip
-    if (alreadyCreatedFact(getClientAddress())) {
+    const canContinue = await alreadyCreatedFact(getClientAddress())
+    if (canContinue) {
         return new Response("Already created a fact!", { status: 400 })
     }
 
