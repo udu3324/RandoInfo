@@ -18,12 +18,12 @@ export async function POST({ request, getClientAddress }) {
         return new Response('Did not provide fact', { status: 402 })
     }
 
-    if (fact.fact.length < 1) {
-        return new Response('Did not provide fact', { status: 402 })
-    }
-
     if (typeof fact.fact !== "string") {
         return new Response('Fact provided is not a string', { status: 403 })
+    }
+
+    if (fact.fact.trim().length < 1) {
+        return new Response('Did not provide fact', { status: 402 })
     }
 
     const { error } = await supabase.from('facts').insert([{
