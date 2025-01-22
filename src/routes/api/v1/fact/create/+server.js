@@ -1,17 +1,17 @@
 import { supabase } from '$lib/supabase.js';
 
 export async function POST({ request, getClientAddress }) {
-    const fact = await request.text().trim()
-
-    if (!fact) {
+    const fact = await request.json()
+    console.log(fact)
+    if (!fact.fact) {
         return new Response('Did not provide fact', { status: 401 })
     }
 
-    if (fact.length < 1) {
+    if (fact.fact.length < 1) {
         return new Response('Did not provide fact', { status: 402 })
     }
 
-    if (typeof fact !== "string") {
+    if (typeof fact.fact !== "string") {
         return new Response('Fact provided is not a string', { status: 403 })
     }
 
