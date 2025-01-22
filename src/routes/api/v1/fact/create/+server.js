@@ -1,4 +1,5 @@
 import { supabase } from '$lib/supabase.js';
+import { TextCensor, RegExpMatcher, englishDataset, englishRecommendedTransformers } from 'obscenity';
 
 export async function POST({ request, getClientAddress }) {
     //check if a fact is already stored from the same user/ip
@@ -30,8 +31,18 @@ export async function POST({ request, getClientAddress }) {
         return new Response('Fact is empty', { status: 402 })
     }
 
+    //parse fact to be more child friendly
+    const censor = new TextCensor()
+    const matcher = new RegExpMatcher({
+        ...englishDataset.build(),
+        ...englishRecommendedTransformers,
+    });
+    const matches = matcher.getAllMatches(fact.fact)
+
+    const parsedFact = censor.applyTo(fact.fact, matches)
+
     const { error } = await supabase.from('facts').insert([{
-        fact: fact.fact,
+        fact: parsedFact,
         ip: getClientAddress()
     }])
 
@@ -41,7 +52,7 @@ export async function POST({ request, getClientAddress }) {
     }
 
     console.log("added fact:", fact)
-    return new Response(`Fact saved sucessfully! "${fact.fact}"`, { status: 200 })
+    return new Response(`Fact saved sucessfully! "${parsedFact}"`, { status: 200 })
 }
 
 async function numOfFactsCreated(ip) {
