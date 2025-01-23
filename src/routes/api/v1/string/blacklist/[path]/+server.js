@@ -47,7 +47,7 @@ export async function POST({ params, request, getClientAddress }) {
         return new Response('IP already blacklisted', { status: 402 })
     }
 
-    const { error } = await supabase.from('strings').insert([{
+    const { error } = await supabase.from('blacklisted').insert([{
         ip: path
     }])
 
