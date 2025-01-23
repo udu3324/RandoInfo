@@ -10,7 +10,6 @@ export async function isBlacklisted(ip) {
     .from('blacklisted')
     .select('*')
     .eq('ip', ip)
-    .single()
 
     //the only error should be the one where a row is not found
     if (error) {
@@ -19,5 +18,9 @@ export async function isBlacklisted(ip) {
         }
     }
 
-    return data?.ip && data.ip.trim() !== ''
+    if (data.length === 0) {
+        return false
+    }
+
+    return true
 }
