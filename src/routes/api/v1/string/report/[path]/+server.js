@@ -35,7 +35,7 @@ export async function POST({ params, request }) {
     });
 
     if (!response.ok) {
-        return new Response(`Failed to create a report for string id ${data.id}`, { status: 501 })  
+        return new Response('Failed to create a report for string id', { status: 501 })  
     }
 
     return new Response(`Sucessfuly created a report for string id ${data.id}`, { status: 200 })

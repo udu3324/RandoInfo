@@ -127,7 +127,7 @@
         "tags": [
           "string"
         ],
-        "summary": "Save a random string to the database",
+        "summary": "Save a string to the database",
         "produces": [
           "text/plain"
         ],
@@ -176,6 +176,44 @@
           },
           "501": {
             "description": "Failed to write to database"
+          }
+        }
+      }
+    },
+    "/string/report/{id}": {
+      "post": {
+        "tags": [
+          "string"
+        ],
+        "summary": "Report a bad string in the database",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The string id that you are reporting",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful invocation response",
+            "schema": {
+              "type": "string",
+              "example": "Sucessfuly created a report for string id ${id}"
+            }
+          },
+          "300": {
+            "description": "Did not provide string id"
+          },
+          "301": {
+            "description": "No string stored with provided id"
+          },
+          "500": {
+            "description": "Failed to read strings database"
+          },
+          "501": {
+            "description": "Failed to create a report for string id"
           }
         }
       }
