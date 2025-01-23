@@ -2,7 +2,7 @@ import { supabase, isBlacklisted } from '$lib/supabase.js';
 import { TextCensor, RegExpMatcher, englishDataset, englishRecommendedTransformers } from 'obscenity';
 
 export async function POST({ request, getClientAddress }) {
-    if (isBlacklisted(getClientAddress())) {
+    if (await isBlacklisted(await getClientAddress())) {
         return new Response("IP Blacklisted", { status: 599 })
     }
     
