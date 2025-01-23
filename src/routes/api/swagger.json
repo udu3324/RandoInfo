@@ -225,7 +225,7 @@
       }
     },
     "/string/blacklist/{ip}": {
-      "delete": {
+      "post": {
         "tags": [
           "string"
         ],
