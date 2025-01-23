@@ -1,7 +1,11 @@
-import { supabase } from '$lib/supabase.js';
+import { supabase, isBlacklisted } from '$lib/supabase.js';
 import { TextCensor, RegExpMatcher, englishDataset, englishRecommendedTransformers } from 'obscenity';
 
 export async function POST({ request, getClientAddress }) {
+    if (isBlacklisted(getClientAddress())) {
+        return new Response("IP Blacklisted", { status: 599 })
+    }
+    
     //check if a string is already stored from the same user/ip
     const numOfStrings = await numOfStringsCreated(getClientAddress())
     if (numOfStrings === -1) {

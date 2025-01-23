@@ -1,7 +1,11 @@
 import { SLACKWEBHOOKURL } from "$env/static/private"
-import { supabase } from "$lib/supabase.js";
+import { isBlacklisted, supabase } from "$lib/supabase.js";
 
-export async function POST({ params, request }) {
+export async function POST({ params, request, getClientAddress }) {
+    if (isBlacklisted(getClientAddress())) {
+        return new Response("IP Blacklisted", { status: 599 })
+    }
+
     const { path } = params
     console.log("path is", path)
 
