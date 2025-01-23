@@ -9,27 +9,27 @@ export async function POST({ request, getClientAddress }) {
     }
 
     if (numOfStrings > 9) {
-        return new Response("Reached creation limit of 10 strings", { status: 400 })
+        return new Response("Reached creation limit of 10 strings", { status: 401 })
     }
 
     let string
     try {
         string = await request.json()
     } catch (error) {
-        return new Response('Invalid json', { status: 401 })
+        return new Response('Invalid json', { status: 402 })
     }
 
     if (!string.string) {
-        return new Response('Did not provide string', { status: 402 })
+        return new Response('Did not provide string', { status: 403 })
     }
 
     if (typeof string.string !== "string") {
-        return new Response('String provided is not a string', { status: 403 })
+        return new Response('String provided is not a string', { status: 404 })
     }
 
     const stringTrimmed = string.string.trim()
     if (stringTrimmed.length < 1) {
-        return new Response('String is empty', { status: 402 })
+        return new Response('String is empty', { status: 403 })
     }
 
     //check if the string is already in the database
@@ -37,9 +37,9 @@ export async function POST({ request, getClientAddress }) {
     if (stringExists === undefined) {
         return new Response("Failed to read strings database", { status: 500 })
     }
-    
+
     if (stringExists) {
-        return new Response('String already is in database', { status: 600 })
+        return new Response('String already is in database', { status: 400 })
     }
 
     //parse string to be more child friendly

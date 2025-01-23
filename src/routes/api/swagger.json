@@ -157,15 +157,18 @@
             }
           },
           "400": {
-            "description": "Reached creation limit of 10 strings"
+            "description": "String already is in database"
           },
           "401": {
-            "description": "Invalid json"
+            "description": "Reached creation limit of 10 strings"
           },
           "402": {
-            "description": "Provided empty string"
+            "description": "Invalid json"
           },
           "403": {
+            "description": "Provided empty string"
+          },
+          "404": {
             "description": "String provided is not a string"
           },
           "500": {
@@ -173,9 +176,6 @@
           },
           "501": {
             "description": "Failed to write to database"
-          },
-          "600": {
-            "description": "String already is in database"
           }
         }
       }
