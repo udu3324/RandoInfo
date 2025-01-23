@@ -274,7 +274,7 @@
           "303": {
             "description": "Auth key is empty"
           },
-          "304": {
+          "344": {
             "description": "Invalid authentication key"
           },
           "400": {

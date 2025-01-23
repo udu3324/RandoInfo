@@ -27,7 +27,7 @@ export async function POST({ params, request, getClientAddress }) {
     }
 
     if (keyTrimmed !== AUTHENTICATIONKEY) {
-        return new Response('Invalid authentication key', { status: 304 })
+        return new Response('Invalid authentication key', { status: 344 })
     }
 
     const { path } = params
