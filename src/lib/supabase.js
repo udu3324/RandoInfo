@@ -18,7 +18,7 @@ export async function isBlacklisted(ip) {
         }
     }
 
-    if (data.length === 0) {
+    if (!data || data.length === 0) {
         return false
     }
 
