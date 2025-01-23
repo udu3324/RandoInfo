@@ -176,6 +176,9 @@
           },
           "501": {
             "description": "Failed to write to database"
+          },
+          "599": {
+            "description": "IP Blacklisted"
           }
         }
       }
@@ -214,6 +217,80 @@
           },
           "501": {
             "description": "Failed to create a report for string id"
+          },
+          "599": {
+            "description": "IP Blacklisted"
+          }
+        }
+      }
+    },
+    "/string/blacklist/{ip}": {
+      "delete": {
+        "tags": [
+          "string"
+        ],
+        "summary": "Blacklist an ip from creating/reporting strings",
+        "parameters": [
+          {
+            "name": "ip",
+            "in": "path",
+            "description": "The ip that is getting blacklisted",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "auth_key",
+            "in": "body",
+            "description": "The authentication key needed to do this action",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string",
+                  "example": "authkey.012345abcdef"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful invocation response",
+            "schema": {
+              "type": "string",
+              "example": "Sucessfully blacklisted ip ${ip}"
+            }
+          },
+          "300": {
+            "description": "Invalid json"
+          },
+          "301": {
+            "description": "Did not provide auth key"
+          },
+          "302": {
+            "description": "Key provided is not a string"
+          },
+          "303": {
+            "description": "Auth key is empty"
+          },
+          "304": {
+            "description": "Invalid authentication key"
+          },
+          "400": {
+            "description": "Did not provide ip"
+          },
+          "401": {
+            "description": "IP provided is invalid"
+          },
+          "402": {
+            "description": "IP already blacklisted"
+          },
+          "500": {
+            "description": "Failed to write to database"
+          },
+          "599": {
+            "description": "IP Blacklisted"
           }
         }
       }

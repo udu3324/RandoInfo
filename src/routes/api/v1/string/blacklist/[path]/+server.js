@@ -55,5 +55,5 @@ export async function POST({ params, request, getClientAddress }) {
         return new Response("Failed to write to database", { status: 500 })
     }
 
-    return new Response(`Sucessfully blacklisted ip "${path}"`, { status: 200 })
+    return new Response(`Sucessfully blacklisted ip ${path}`, { status: 200 })
 }
