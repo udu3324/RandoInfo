@@ -24,12 +24,3 @@ export async function isBlacklisted(ip) {
 
     return true
 }
-
-export async function isBlacklisted2(ip) {
-    const { data, error } = await supabase
-    .from('blacklisted')
-    .select('*')
-    .eq('ip', ip)
-
-    return [ data, error ]
-}
