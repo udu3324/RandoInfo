@@ -7,7 +7,7 @@ export async function POST({ params, request, getClientAddress }) {
     }
 
     const { path } = params
-    console.log("path is", path)
+    //console.log("path is", path)
 
     if (!path) {
         return new Response("Did not provide string id", { status: 300 })
