@@ -1,4 +1,4 @@
-import { isBlacklisted } from '$lib/supabase.js'
+import { supabase, isBlacklisted } from '$lib/supabase.js'
 import { AUTHENTICATIONKEY } from "$env/static/private"
 
 export async function POST({ params, request, getClientAddress }) {
