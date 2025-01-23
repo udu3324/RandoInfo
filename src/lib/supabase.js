@@ -18,7 +18,6 @@ export async function isBlacklisted(ip) {
             return false
         }
     }
-    console.log("got data of", data)
-    console.log("it is", (data !== null))
-    return data !== null
+
+    return data?.ip && data.ip.trim() !== ''
 }
