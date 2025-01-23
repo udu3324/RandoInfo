@@ -9,9 +9,7 @@ export async function POST({ params, request }) {
         return new Response("Did not provide string id", { status: 300 })
     }
 
-    if (typeof path !== "number") {
-        return new Response("String id provided is invalid", { status: 301 })
-    }
+    const id = Number.parseInt(path)
     
     //search in supabase for a row with the id
     const { data, error } = await supabase
@@ -21,7 +19,7 @@ export async function POST({ params, request }) {
         .single()
     
     if (error && error.code === 'PGRST116') {
-        return new Response("No string stored with provided id", { status: 302 })
+        return new Response("No string stored with provided id", { status: 301 })
     }
 
     if (error) {
