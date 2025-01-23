@@ -27,8 +27,19 @@ export async function POST({ request, getClientAddress }) {
         return new Response('String provided is not a string', { status: 403 })
     }
 
-    if (string.string.trim().length < 1) {
+    const stringTrimmed = string.string.trim()
+    if (stringTrimmed.length < 1) {
         return new Response('String is empty', { status: 402 })
+    }
+
+    //check if the string is already in the database
+    const stringExists = await stringAlreadyInDB(stringTrimmed)
+    if (stringExists === undefined) {
+        return new Response("Failed to read strings database", { status: 500 })
+    }
+    
+    if (stringExists) {
+        return new Response('String already is in database', { status: 600 })
     }
 
     //parse string to be more child friendly
@@ -37,12 +48,12 @@ export async function POST({ request, getClientAddress }) {
         ...englishDataset.build(),
         ...englishRecommendedTransformers,
     });
-    const matches = matcher.getAllMatches(string.string)
+    const matches = matcher.getAllMatches(stringTrimmed)
 
-    const parsedString = censor.applyTo(string.string, matches)
+    const stringCensored = censor.applyTo(stringTrimmed, matches)
 
     const { error } = await supabase.from('strings').insert([{
-        string: parsedString,
+        string: stringCensored,
         ip: getClientAddress()
     }])
 
@@ -51,8 +62,8 @@ export async function POST({ request, getClientAddress }) {
         return new Response("Failed to write to database", { status: 501 })
     }
 
-    console.log("added string:", parsedString)
-    return new Response(`String saved sucessfully! "${parsedString}"`, { status: 200 })
+    console.log("added string:", stringCensored)
+    return new Response(`String saved sucessfully! "${stringCensored}"`, { status: 200 })
 }
 
 async function numOfStringsCreated(ip) {
@@ -66,4 +77,17 @@ async function numOfStringsCreated(ip) {
     }
 
     return count
+}
+
+async function stringAlreadyInDB(string) {
+    const { data, error } = await supabase
+    .from('strings')
+    .select('string')
+    .ilike('string', `%${string}%`)
+
+    if (error) {
+        return undefined
+    }
+
+    return data.length > 0
 }

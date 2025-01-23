@@ -10,9 +10,20 @@
   "schemes": [
     "https"
   ],
+  "tags": [
+    {
+      "name": "weather"
+    },
+    {
+      "name": "string"
+    }
+  ],
   "paths": {
     "/weather": {
       "get": {
+        "tags": [
+          "weather"
+        ],
         "summary": "Returns the forecast from a random city in the entire world.",
         "produces": [
           "application/json"
@@ -69,6 +80,102 @@
           },
           "504": {
             "description": "Gateway timeout/ratelimit"
+          }
+        }
+      }
+    },
+    "/string": {
+      "get": {
+        "tags": [
+          "string"
+        ],
+        "summary": "Get a random string saved in the database",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful invocation response",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "integer"
+                },
+                "string": {
+                  "type": "string"
+                },
+                "timestamp": {
+                  "type": "string",
+                  "example": "2025-01-22T04:39:10.513092+00:00"
+                },
+                "report": {
+                  "type": "string",
+                  "example": "Send a POST request to /string/report"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Failed to read strings database"
+          }
+        }
+      }
+    },
+    "/string/create": {
+      "post": {
+        "tags": [
+          "string"
+        ],
+        "summary": "Save a random string to the database",
+        "produces": [
+          "text/plain"
+        ],
+        "parameters": [
+          {
+            "name": "string",
+            "in": "body",
+            "description": "String that will be added (inappropriate strings will result in an blacklist)",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "string": {
+                  "type": "string",
+                  "example": "Type your string here!"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful invocation response",
+            "schema": {
+              "type": "string",
+              "example": "String saved sucessfully! \"${string}\""
+            }
+          },
+          "400": {
+            "description": "Reached creation limit of 10 strings"
+          },
+          "401": {
+            "description": "Invalid json"
+          },
+          "402": {
+            "description": "Provided empty string"
+          },
+          "403": {
+            "description": "String provided is not a string"
+          },
+          "500": {
+            "description": "Failed to read strings database"
+          },
+          "501": {
+            "description": "Failed to write to database"
+          },
+          "600": {
+            "description": "String already is in database"
           }
         }
       }
