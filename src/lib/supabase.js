@@ -8,7 +8,7 @@ export const supabase = createClient( supabaseUrl, SUPABASEKEY )
 export async function isBlacklisted(ip) {
     const { data, error } = await supabase
     .from('blacklisted')
-    .select('ip')
+    .select('*')
     .eq('ip', ip)
     .single()
 
