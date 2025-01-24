@@ -51,9 +51,6 @@
                 }
               }
             }
-          },
-          "400": {
-            "description": "Unable to fetch emoji resource"
           }
         }
       }

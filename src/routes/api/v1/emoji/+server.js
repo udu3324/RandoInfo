@@ -1,14 +1,9 @@
+import emojis from '$lib/assets/emojis.json'
 import { json } from '@sveltejs/kit'
-import fs from 'node:fs/promises'
-import path from 'node:path'
+
+//emojis.json from https://emoji-api.com (fetched on 1/23/2025)
 
 export async function GET() {
-    const emojis = await fetchEmojisResource()
-    
-    if (!emojis) {
-        return new Response("Unable to fetch emoji resource", { status: 400 })
-    }
-
     const randomIndex = Math.floor(Math.random() * emojis.length)
     const emoji = emojis[randomIndex]
 
@@ -19,25 +14,6 @@ export async function GET() {
         name: filteredName,
         group: `${emoji.group}/${emoji.subGroup}`
     }, { status: 200 })
-}
-
-//json from https://emoji-api.com (fetched on 1/23/2025)
-async function fetchEmojisResource() {
-    try {
-        const filePath = path.resolve('static/emojis.json')
-        const data = await fs.readFile(filePath, 'utf-8')
-
-        return JSON.parse(data)
-    } catch (error) {
-        try {
-            const filePath = path.resolve('https://rando-info.vercel.app/emojis.json')
-            const data = await fs.readFile(filePath, 'utf-8')
-    
-            return JSON.parse(data)
-        } catch (error) {
-            return undefined
-        }
-    }
 }
 
 //ty https://stackoverflow.com/a/196991
