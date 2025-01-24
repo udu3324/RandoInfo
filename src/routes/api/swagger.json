@@ -12,6 +12,9 @@
   ],
   "tags": [
     {
+      "name": "emoji"
+    },
+    {
       "name": "weather"
     },
     {
@@ -19,6 +22,42 @@
     }
   ],
   "paths": {
+    "/emoji": {
+      "get": {
+        "tags": [
+          "emoji"
+        ],
+        "summary": "Get a random emoji from the unicode list",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful invocation response",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "emoji": {
+                  "type": "string",
+                  "example": "🐲"
+                },
+                "name": {
+                  "type": "string",
+                  "example": "Dragon Face"
+                },
+                "group": {
+                  "type": "string",
+                  "example": "animals-nature/animal-reptile"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Unable to fetch emoji resource"
+          }
+        }
+      }
+    },
     "/weather": {
       "get": {
         "tags": [
