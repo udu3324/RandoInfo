@@ -18,6 +18,9 @@
       "name": "weather"
     },
     {
+      "name": "wikipedia"
+    },
+    {
       "name": "string"
     }
   ],
@@ -116,6 +119,54 @@
           },
           "504": {
             "description": "Gateway timeout/ratelimit"
+          }
+        }
+      }
+    },
+    "/wikipedia/article": {
+      "get": {
+        "tags": [
+          "wikipedia"
+        ],
+        "summary": "Get a random article from wikipedia",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful invocation response",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                },
+                "extract": {
+                  "type": "string"
+                },
+                "language": {
+                  "type": "string"
+                },
+                "timestamp": {
+                  "type": "string"
+                },
+                "url": {
+                  "type": "string"
+                },
+                "page_id": {
+                  "type": "integer"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unable to fetch random wikipedia article"
+          },
+          "402": {
+            "description": "An error occured while fetching an article"
           }
         }
       }
