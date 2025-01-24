@@ -30,7 +30,7 @@ async function fetchEmojisResource() {
         return JSON.parse(data)
     } catch (error) {
         try {
-            const filePath = path.resolve('/emojis.json')
+            const filePath = path.resolve('https://rando-info.vercel.app/emojis.json')
             const data = await fs.readFile(filePath, 'utf-8')
     
             return JSON.parse(data)
