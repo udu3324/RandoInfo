@@ -29,7 +29,14 @@ async function fetchEmojisResource() {
 
         return JSON.parse(data)
     } catch (error) {
-        return undefined
+        try {
+            const filePath = path.resolve('/emojis.json')
+            const data = await fs.readFile(filePath, 'utf-8')
+    
+            return JSON.parse(data)
+        } catch (error) {
+            return undefined
+        }
     }
 }
 
