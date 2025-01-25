@@ -38,7 +38,7 @@ export async function GET() {
 
         return json({
             url: url,
-            file: source,
+            file: `https://${source}`,
             transcript: transcript
         }, { status: 200 })
     } catch (error) {

@@ -225,6 +225,45 @@
         }
       }
     },
+    "/wikipedia/file": {
+      "get": {
+        "tags": [
+          "wikipedia"
+        ],
+        "summary": "Get a random file from wikipedia",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful invocation response",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "url": {
+                  "type": "string"
+                },
+                "file": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Unable to get wikipedia redirect url"
+          },
+          "401": {
+            "description": "Unable to fetch wikipedia file html"
+          },
+          "402": {
+            "description": "Error occured while fetching wikipedia file"
+          }
+        }
+      }
+    },
     "/string": {
       "get": {
         "tags": [
