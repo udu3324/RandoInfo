@@ -1,38 +1,38 @@
-# sv
+[![Vercel](https://img.shields.io/badge/Vercel-%23000000.svg?logo=vercel&logoColor=white)](#)
+[![SvelteKit](https://img.shields.io/badge/SvelteKit-%23f1413d.svg?logo=svelte&logoColor=white)](#)
+[![Supabase](https://img.shields.io/badge/Supabase-3FCF8E?logo=supabase&logoColor=fff)](#)
+[![pnpm](https://img.shields.io/badge/pnpm-F69220?logo=pnpm&logoColor=fff)](#)
+[![Slack](https://img.shields.io/badge/Slack-4A154B?logo=slack&logoColor=fff)](#)
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+# RandoInfo
 
-## Creating a project
+A simple little API built on Sveltekit, Supabase, and Vercel. It provides random information from wikipedia, the forecast, and more.
 
-If you're seeing this, you've probably already done this step. Congrats!
+## API Docs/Swagger
 
-```bash
-# create a new project in the current directory
-npx sv create
+You can try out RandoInfo [here](https://rando-info.vercel.app/) with a full frontend! The swagger api docs are avaliable [here](https://rando-info.vercel.app/api) too.
 
-# create a new project in my-app
-npx sv create my-app
-```
+All endpoints are under /api/v1.
 
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+## Developing/Running RandoInfo
 
 ```bash
 npm run dev
 
 # or start the server and open the app in a new browser tab
 npm run dev -- --open
+
+# use pnpm to install extra packages
+pnpn i (pkg name)
 ```
 
-## Building
+## Environment Variables
 
-To create a production version of your app:
+Rename example.env to .env, and get your api keys from [weatherapi](https://www.weatherapi.com) (forecast info), [supabase](https://supabase.com/) (string storing), and slack (string reporting) to get RandoInfo up and running!
 
-```bash
-npm run build
+```env
+WEATHERAPIKEY=
+SUPABASEKEY=
+SLACKWEBHOOKURL= (create a slack workflow that starts with a webhook & accepts json keys: ip, reported_string, id)
+AUTHENTICATIONKEY= (create your own key to authenticate blacklist requests with the api)
 ```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.

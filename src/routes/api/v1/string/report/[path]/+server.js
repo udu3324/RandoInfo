@@ -15,6 +15,10 @@ export async function POST({ params, request, getClientAddress }) {
 
     const id = Number.parseInt(path)
     
+    if (Number.isNaN(id)) {
+        return new Response("Id provided is not a number", { status: 302 })
+    }
+
     //search in supabase for a row with the id
     const { data, error } = await supabase
         .from('strings')
@@ -34,7 +38,8 @@ export async function POST({ params, request, getClientAddress }) {
         method: "POST",
         body: JSON.stringify({
             id: data.id,
-            reported_string: data.string
+            reported_string: data.string, 
+            ip: getClientAddress()
         }),
     });
 

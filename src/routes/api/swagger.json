@@ -392,6 +392,9 @@
           "301": {
             "description": "No string stored with provided id"
           },
+          "302": {
+            "description": "Id provided is not a number"
+          },
           "500": {
             "description": "Failed to read strings database"
           },
