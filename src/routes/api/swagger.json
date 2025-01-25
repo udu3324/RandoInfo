@@ -3,7 +3,15 @@
   "info": {
     "version": "1.0.0",
     "title": "RandoInfo",
-    "description": "Get random bits of information!"
+    "description": "Get random bits of information!",
+    "license": {
+      "name": "GNU General Public License v3.0",
+      "url": "https://github.com/udu3324/RandoInfo/blob/main/LICENSE"
+    }
+  },
+  "externalDocs": {
+    "description": "Source Code",
+    "url": "https://github.com/udu3324/RandoInfo"
   },
   "host": "rando-info.vercel.app",
   "basePath": "/api/v1",
@@ -167,6 +175,52 @@
           },
           "402": {
             "description": "An error occured while fetching an article"
+          }
+        }
+      }
+    },
+    "/wikipedia/timedtext": {
+      "get": {
+        "tags": [
+          "wikipedia"
+        ],
+        "summary": "Get a random timedtext from wikipedia",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful invocation response",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "url": {
+                  "type": "string"
+                },
+                "file": {
+                  "type": "string"
+                },
+                "transcript": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "example": [
+                    "# - timestamp1 --- timestamp2",
+                    "string"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Unable to get wikipedia redirect url"
+          },
+          "401": {
+            "description": "Unable to fetch wikipedia timedtext html"
+          },
+          "402": {
+            "description": "Error occured while fetching wikipedia timedtext"
           }
         }
       }

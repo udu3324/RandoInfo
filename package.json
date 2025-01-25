@@ -19,6 +19,7 @@
 	"dependencies": {
 		"@supabase/supabase-js": "^2.48.0",
 		"all-the-cities": "^3.1.0",
+		"jsdom": "^26.0.0",
 		"obscenity": "^0.4.2",
 		"swagger-ui": "^5.18.2"
 	}
