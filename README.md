@@ -6,13 +6,13 @@
 
 # RandoInfo
 
-A simple little API built on Sveltekit, Supabase, and Vercel. It provides random information from wikipedia, the forecast, and more.
+A simple little API built on a small stack. It provides random information from wikipedia, the forecast, and more.
 
 ## API Docs/Swagger
 
 You can try out RandoInfo [here](https://rando-info.vercel.app/) with a full frontend! The swagger api docs are avaliable [here](https://rando-info.vercel.app/api) too.
 
-All endpoints are under /api/v1.
+All endpoints are under `/api/v1`
 
 ## Developing/Running RandoInfo
 
@@ -32,7 +32,10 @@ Rename example.env to .env, and get your api keys from [weatherapi](https://www.
 
 ```env
 WEATHERAPIKEY=
+SUPABASEURL=
 SUPABASEKEY=
-SLACKWEBHOOKURL= (create a slack workflow that starts with a webhook & accepts json keys: ip, reported_string, id)
-AUTHENTICATIONKEY= (create your own key to authenticate blacklist requests with the api)
+# create a slack workflow that starts with a webhook & accepts json keys: ip, reported_string, id
+SLACKWEBHOOKURL=
+# create your own unique key to authenticate requests with the api
+AUTHENTICATIONKEY=
 ```

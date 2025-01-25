@@ -94,7 +94,7 @@
 
         <div class="inner-panel">
             <div style="margin-bottom:5px">
-                <h>GET Endpoints - {getEndpointURL}</h>
+                <h>GET Endpoints <code>{getEndpointURL}</code></h>
             </div>
 
             <button disabled={awaitingResponse} on:click={() => useGetEndpoint('/api/v1/emoji')}>Emoji</button>
@@ -111,7 +111,7 @@
 
         <div class="inner-panel">
             <div style="margin-bottom:5px">
-                <h>POST Endpoints - {postEndpointURL}</h>
+                <h>POST Endpoints <code>{postEndpointURL}</code></h>
             </div>
 
             <button disabled={awaitingResponse} on:click={() => {postPath = "/api/v1/string/create"}}>Create String</button>
@@ -153,7 +153,7 @@
 
     button:disabled {
         background-color: #0b502a;
-        cursor: not-allowed;
+        cursor: wait;
     }
 
     button:hover {
@@ -162,7 +162,7 @@
 
     button:disabled:hover {
         background-color: #0b502a;
-        cursor: not-allowed;
+        cursor: wait;
     }
 
     .container {
@@ -199,8 +199,14 @@
     .result-panel {
         margin-top: 15px;
         padding: 15px;
-        background-color: rgb(197, 196, 196);
-        color: #3b4151;
+        background-color: #1e2127;
+        color: #dfdfdf;
         overflow: auto;
+        border-radius: 5px;
+    }
+
+    pre {
+        margin-bottom: 0;
+        margin-top: 0;
     }
 </style>
