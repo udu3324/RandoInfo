@@ -7,6 +7,8 @@
 # RandoInfo
 
 A simple little API built on a small stack. It provides random information from wikipedia, the forecast, and more.
+![image](https://github.com/user-attachments/assets/fd16ab23-8ce4-4728-80e9-8c095fff65be)
+![image](https://github.com/user-attachments/assets/ac05cbe1-8a98-43e4-a859-008209b10c9d)
 
 ## API Docs/Swagger
 
